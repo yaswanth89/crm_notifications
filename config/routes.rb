@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   post 'login'  => 'sessions#create'
   get 'logout' => 'sessions#destroy'
   get 'my_tasks' => 'users#tasks'
+  get 'reminders' => 'users#reminders'
+  get 'notifications' => 'users#notifications'
   resources :users
 end

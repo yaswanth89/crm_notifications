@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:tasks,:show]
+  before_action :logged_in_user, only: [:tasks,:show,:reminders,:notifications]
   before_action :correct_user,   only: [:show]
 
   def new
@@ -25,8 +25,18 @@ class UsersController < ApplicationController
     render :json => current_user.tasks
   end
 
+  def reminders
+    remind = current_user.tasks.to_remind.where("at < ? ",10.minutes.from_now)
+    remind.each { |item|
+      item.update(remind: false) }
+    render :json => remind
+  end
+
   def notifications
-    render :json => current_user.tasks
+    remind = current_user.tasks.to_notify
+    remind.each { |item|
+      item.update(notify: false) }
+    render :json => remind
   end
 
   private
