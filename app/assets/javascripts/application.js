@@ -19,5 +19,14 @@
 
 
 $(document).ready(function(){
-
+	if(!!window.user_id){
+        PrivatePub.subscribe("/messages/" + window.user_id, function(data, channel) {
+            $.notify({
+             	message: "<strong>" + data.head + "</strong> <br/>" +  data.content
+            },{
+             	type: data.theme,
+                newest_on_top: true
+            });
+        });
+	}
 });

@@ -67,7 +67,11 @@
 </div>
 <%= javascript_include_tag 'application' %>
 <% if logged_in?%>
-    <%= subscribe_to '/messages/new' %>
+    <%= subscribe_to '/messages/' + @current_user.id.to_s %>
+
+    <script type="text/javascript">
+        window.user_id = <%= @current_user.id %>;
+    </script>
 <% end%>
 </body>
 </html>

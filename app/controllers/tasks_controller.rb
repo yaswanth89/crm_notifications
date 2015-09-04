@@ -10,6 +10,7 @@ class TasksController < ApplicationController
 
     if @task.save
       flash[:success] = "Created Task!"
+      PrivatePub.publish_to ("/messages/" + @task.user_id.to_s), :head => "New Task" , :theme => "success" , :content => @task.content
       redirect_to(root_url)
     else
       render 'new'

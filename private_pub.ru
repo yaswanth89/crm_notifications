@@ -25,10 +25,4 @@ app.bind(:unsubscribe) do |client_id, channel|
   UnsubscribeClient.perform_async(client_id)
 end
 
-# disconnect - offline
-app.bind(:disconnect) do |client_id|
-  puts "Client disconnect: #{client_id}"
-  UnsubscribeClient.perform_async(client_id)
-end
-
 run app
