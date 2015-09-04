@@ -12,37 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require turbolinks
+//= require private_pub
 //= require_tree .
 
 
 $(document).ready(function(){
-    function getNotifs(){
-        $.get("/reminders?r=" + new Date().getTime(),function(data){
-            $.each(data,function(index){
-                $.notify({
-                    message: "<strong>Upcoming Task</strong>  <br/>"+ this.content
-                },{
-                    type: 'info',
-                    newest_on_top: true
-                });
-            });
-            console.log(data);
-        });
-        $.get("/notifications?r=" + new Date().getTime(),function(data){
-            $.each(data,function(index){
-                $.notify({
-                    message: "<strong>New Task</strong> <br/>" + this.content
-                },{
-                    type: 'success',
-                    newest_on_top: true
-                });
-            });
-            console.log(data);
-        });
-    }
-    if(window.logged_in) {
-        getNotifs();
-        setInterval(getNotifs, 5000);
-    }
+
 });

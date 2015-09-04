@@ -5,8 +5,6 @@ Rails.application.routes.draw do
 
   get 'tasks/all'
 
-  get 'static/home'
-
   root 'static#home'
   get 'signup'  => 'users#new'
   get 'login'   => 'sessions#new'

@@ -10,7 +10,7 @@ class TasksController < ApplicationController
 
     if @task.save
       flash[:success] = "Created Task!"
-      redirect_to(users_url)
+      redirect_to(root_url)
     else
       render 'new'
     end
