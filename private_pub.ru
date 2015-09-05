@@ -37,8 +37,11 @@ app.bind(:unsubscribe) do |client_id, channel|
 
   user_id = channel.split("/").last
   db.execute 'DELETE FROM active_users WHERE user_id = ?',user_id
-  
-  UnsubscribeClient.perform_async(client_id)
+  begin
+    UnsubscribeClient.perform_async(client_id)
+  rescue Exception => e
+    ##
+  end
 end
 
 run app
