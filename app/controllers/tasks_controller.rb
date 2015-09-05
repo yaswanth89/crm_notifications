@@ -8,8 +8,9 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
-
+    check = task_params
+    check[:at] = Time.parse(check[:at])
+    @task = Task.new(check)
     if @task.save
       flash[:success] = "Created Task!"
       @task.notify_user('notify')

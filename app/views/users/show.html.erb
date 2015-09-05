@@ -13,8 +13,8 @@
 		<% @user.tasks.each do |e| %>
 			<div class="row">
 				<div class="col-md-12">
-					<h4><%= e.content %></h4>
-					<p><%= e.at %></p>
+					<h4><%= link_to e.content, e %></h4>
+					<p><%= e.at.localtime.strftime("%F %H:%M") %></p>
 				</div>
 			</div>
 		<% end %>

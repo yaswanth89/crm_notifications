@@ -1,7 +1,8 @@
 class Task < ActiveRecord::Base
   belongs_to :user
   validates :user_id, presence: true
-  scope :to_remind, -> {where("remind = ? AND at < ? ", true , 10.minutes.from_now)}
+  validates :at, presence: true
+  scope :to_remind, -> {where("remind = ? AND at < ? ", true , 10.minutes.from_now.utc)}
   scope :to_notify, -> {where(notify: true)}
 
   def self.send_pending_notifications

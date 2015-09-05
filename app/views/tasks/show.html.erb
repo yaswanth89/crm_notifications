@@ -4,6 +4,6 @@
     <div class="col-md-6 col-md-offset-3">
         <p><strong>Task Details:</strong> <%= @task.content %></p>
         <p><strong>Assigned User:</strong> <%= @task.user.name %></p>
-        <p><strong>Scheduled At:</strong> <%= @task.at %></p>
+        <p><strong>Scheduled At:</strong> <%= @task.at.localtime.strftime("%F %H:%M") %></p>
     </div>
 </div>

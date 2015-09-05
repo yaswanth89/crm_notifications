@@ -1,14 +1,2 @@
 <h1>Welcome to test app</h1>
-<p>go to</p>
-<ul>
-<% if logged_in? %>
-    <% if admin? %>
-        <li><%= link_to "All users",users_path %></li>
-    <% end %>
-    <li><%= link_to "My tasks",my_tasks_path %></li>
-    <li><%= link_to "Logout",logout_path %></li>
-<% else %>
-    <li><%= link_to "Signup", signup_path %></li>
-    <li><%= link_to "Login", login_path %></li>
-<% end %>
-</ul>
+<p>Use the links in the nav bar to proceed</p>
