@@ -8,10 +8,10 @@
             <%= f.text_area :content, class: 'form-control' %>
 
             <%= f.label :user_id %>
-            <%= f.text_field :user_id, class: 'form-control'  %>
+            <%= f.select :user_id, @users.collect { |e| [e[:name], e[:id]] }, {}, {class: 'form-control'} %>
 
             <%= f.label :at %>
-            <%= f.text_field :at, class: 'form-control'  %>
+            <%= f.text_field :at, {class: 'form-control', 'data-provide' => 'datepicker'} %>
 
             <%= f.submit "Create task", class: "btn btn-primary" %>
         <% end %>

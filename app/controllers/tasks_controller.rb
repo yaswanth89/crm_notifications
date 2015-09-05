@@ -1,5 +1,4 @@
 class TasksController < ApplicationController
-
   def new
     @task = Task.new
     @users = User.all
@@ -10,7 +9,7 @@ class TasksController < ApplicationController
 
     if @task.save
       flash[:success] = "Created Task!"
-      PrivatePub.publish_to ("/messages/" + @task.user_id.to_s), :head => "New Task" , :theme => "success" , :content => @task.content
+      @task.notify_user('notify')
       redirect_to(root_url)
     else
       render 'new'
@@ -20,6 +19,8 @@ class TasksController < ApplicationController
   def show
     @task = Task.find(params[:id])
   end
+
+  
 
   private
   def task_params
