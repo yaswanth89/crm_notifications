@@ -19,13 +19,11 @@ class Task < ActiveRecord::Base
 		when "remind"
 			head = "Upcoming Task"
 			theme = "info"
-			self.remind = false
-			self.save
+			self.toggle!(:remind)
 		when "notify"
 			head = "New Task"
 			theme = "success"
-			self.notify = false
-			self.save
+			self.toggle!(:notify)
 		end
 		PrivatePub.publish_to ("/messages/" + self.user_id.to_s), :head => head, :theme => theme, :content => self.content
 	end

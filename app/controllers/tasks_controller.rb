@@ -1,4 +1,7 @@
 class TasksController < ApplicationController
+  before_action :logged_in_user
+  before_action :correct_user, only: [:show]
+
   def new
     @task = Task.new
     @users = User.all
@@ -36,6 +39,16 @@ class TasksController < ApplicationController
 
   def correct_user
     @user = Task.find(params[:id]).user
-    redirect_to(root_url) unless current_user?(@user)
+    unless current_user?(@user) || current_user.admin?
+      flash[:danger] = "Unauthorized access."
+      redirect_to(root_url) 
+    end
+  end
+
+  def admin_user
+    unless current_user.admin?
+      flash[:danger] = "Unauthorized access."
+      redirect_to(root_url)
+    end
   end
 end

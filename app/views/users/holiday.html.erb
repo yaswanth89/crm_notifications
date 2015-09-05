@@ -1,0 +1,15 @@
+<% provide(:title, "Create Holiday") %>
+<h1>Create a holiday for <%= @user.name  %></h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(:holiday, url: create_holiday_user_path) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :at %>
+      <%= f.text_field :at, class: 'form-control' %>
+
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

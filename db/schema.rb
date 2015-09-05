@@ -11,13 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150904133227) do
+ActiveRecord::Schema.define(version: 20150905101306) do
 
   create_table "active_users", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "holidays", force: :cascade do |t|
+    t.date     "at"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "holidays", ["user_id"], name: "index_holidays_on_user_id"
+
+  create_table "leaves", force: :cascade do |t|
+    t.date     "at"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "leaves", ["user_id"], name: "index_leaves_on_user_id"
 
   create_table "tasks", force: :cascade do |t|
     t.text     "content"
@@ -40,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150904133227) do
     t.string   "password_digest"
     t.boolean  "admin"
     t.integer  "some_column",     default: 1, null: false
+    t.integer  "mand_off",        default: 0
   end
 
 end

@@ -1,13 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-    <strong>Name:</strong>
-    <%= @user.name %>
-</p>
-
-<p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-</p>
-
-<%= link_to 'My tasks', my_tasks_path %>
+<div class="row">
+	<div class="col-md-3">
+		<h3><%= @user.name %></h3>
+		<p><%= @user.email %></p>
+		<h4>Mandatory Off</h4>
+		<p><%= User::RoasterConstant::DAYS_ARRAY[@user.mand_off] %></p>
+		<h4>Leaves taken</h4>
+		<% @user.holidays.each do |e| %>
+			<p><%= e.at %></p>
+		<% end %>
+	</div>
+	<div class="col-md-9">
+		<% @user.tasks.each do |e| %>
+			<div class="row">
+				<div class="col-md-12">
+					<h4><%= e.content %></h4>
+					<p><%= e.at %></p>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
