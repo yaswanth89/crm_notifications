@@ -24,6 +24,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @tasks = @user.tasks.order(:at)
   end
 
   def roaster
@@ -34,7 +35,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.mand_off = roaster_params[:mand_off]
     @user.save!
-    render 'show'
+    redirect_to @user
   end
 
   def tasks
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
   def create_holiday
     @user = User.find(params[:id])
     @user.holidays.create(holiday_params)
-    render 'show'
+    redirect_to @user
   end
 
 
