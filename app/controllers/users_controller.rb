@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:tasks,:show,:reminders,:notifications]
   before_action :correct_user, only: [:show]
-  before_action :admin_user, only: [:roaster,:update_roaster,:index]
+  before_action :admin_user, only: [:roaster,:update_roaster,:index,:get_available_users]
   
   def index
     @users = User.all
@@ -51,6 +51,19 @@ class UsersController < ApplicationController
     @user.holidays.create(holiday_params)
     redirect_to @user
   end
+
+  def get_available_users
+    @date = Date.parse(params[:date])
+    week_day = @date.cwday % 7
+    @users  = User.where.not(mand_off: week_day).select { |e| 
+      if(e.holidays.count != 0)
+        e.holidays.where(at: @date).count == 0 
+      else
+        true
+      end
+    }
+  end
+
 
 
 

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   post 'login'  => 'sessions#create'
   get 'logout' => 'sessions#destroy'
   get 'my_tasks' => 'users#tasks'
+  get 'au_handle' => 'static#available_users'
+  get 'avalable_users/:date' => 'users#get_available_users'
 
   resources :tasks
 
