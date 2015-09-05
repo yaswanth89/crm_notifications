@@ -26,7 +26,8 @@ class Task < ActiveRecord::Base
 			theme = "success"
 			self.toggle!(:notify)
 		end
-		PrivatePub.publish_to ("/messages/" + self.user_id.to_s), :head => head, :theme => theme, :content => self.content
+    url = "/tasks/"+self.id.to_s
+		PrivatePub.publish_to ("/messages/" + self.user_id.to_s), :head => head, :theme => theme, :content => self.content, :url => url
 	end
   end
 

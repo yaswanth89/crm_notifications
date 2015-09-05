@@ -23,8 +23,10 @@
 $(document).ready(function(){
 	if(!!window.user_id){
         PrivatePub.subscribe("/messages/" + window.user_id, function(data, channel) {
+            console.log(data);
             $.notify({
-             	message: "<strong>" + data.head + "</strong> <br/>" +  data.content
+             	message: "<strong>" + data.head + "</strong> <br/>" +  data.content,
+                url:data.url
             },{
              	type: data.theme,
                 newest_on_top: true
